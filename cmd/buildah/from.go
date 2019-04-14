@@ -227,7 +227,6 @@ func fromCmd(c *cobra.Command, args []string, iopts fromReply) error {
 		CommonBuildOpts:       commonOpts,
 		Format:                format,
 		BlobDirectory:         iopts.BlobCache,
-		HttpProxy:             iopts.HttpProxy,
 	}
 
 	if !iopts.quiet {
