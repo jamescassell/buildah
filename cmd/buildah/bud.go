@@ -272,6 +272,7 @@ func budCmd(c *cobra.Command, inputArgs []string, iopts budResults) error {
 		ForceRmIntermediateCtrs: iopts.ForceRm,
 		BlobDirectory:           iopts.BlobCache,
 		Target:                  iopts.Target,
+		HttpProxy:               iopts.HttpProxy,
 	}
 
 	if iopts.Quiet {
