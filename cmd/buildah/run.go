@@ -133,6 +133,7 @@ func runCmd(c *cobra.Command, args []string, iopts runInputOptions) error {
 		NoPivot:          noPivot,
 		User:             c.Flag("user").Value.String(),
 		Isolation:        isolation,
+		HttpProxy:        iopts.HttpProxy,
 		NamespaceOptions: namespaceOptions,
 		ConfigureNetwork: networkPolicy,
 		CNIPluginPath:    iopts.CNIPlugInPath,
