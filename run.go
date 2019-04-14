@@ -930,21 +930,23 @@ func (b *Builder) configureUIDGID(g *generate.Generator, mountPoint string, opti
 	return nil
 }
 
-func (b *Builder) configureEnvironment(g *generate.Generator, options RunOptions) {
+func (b *Builder) configureEnvironment(g *generate.Generator, options RunOptions, HttpProxy bool) {
 	g.ClearProcessEnv()
-	for _, envSpec := range []string{
-			"http_proxy",
-			"HTTP_PROXY",
-			"https_proxy",
-			"HTTPS_PROXY",
-			"ftp_proxy",
-			"FTP_PROXY",
-			"no_proxy",
-			"NO_PROXY",
-			} {
-		envVal := os.Getenv(envSpec)
-		if envVal != "" {
-			g.AddProcessEnv(envSpec, envVal)
+	if HttpProxy {
+		for _, envSpec := range []string{
+				"http_proxy",
+				"HTTP_PROXY",
+				"https_proxy",
+				"HTTPS_PROXY",
+				"ftp_proxy",
+				"FTP_PROXY",
+				"no_proxy",
+				"NO_PROXY",
+				} {
+			envVal := os.Getenv(envSpec)
+			if envVal != "" {
+				g.AddProcessEnv(envSpec, envVal)
+			}
 		}
 	}
 
@@ -1043,7 +1045,7 @@ func (b *Builder) Run(command []string, options RunOptions) error {
 		return err
 	}
 
-	b.configureEnvironment(g, options)
+	b.configureEnvironment(g, options, b.CommonBuildOpts.HttpProxy)
 
 	if b.CommonBuildOpts == nil {
 		return errors.Errorf("Invalid format on container you must recreate the container")

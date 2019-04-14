@@ -282,6 +282,8 @@ type CommonBuildOptions struct {
 	CPUSetCPUs string
 	// CPUSetMems memory nodes (MEMs) in which to allow execution (0-3, 0,1). Only effective on NUMA systems.
 	CPUSetMems string
+	// HttpProxy determines whether *_proxy env vars from the build host are passed into the container.
+	HttpProxy bool
 	// Memory is the upper limit (in bytes) on how much memory running containers can use.
 	Memory int64
 	// MemorySwap limits the amount of memory and swap together.
