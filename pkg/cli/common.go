@@ -54,7 +54,6 @@ type BudResults struct {
 	DisableContentTrust bool
 	File                []string
 	Format              string
-	HttpProxy    bool
 	Iidfile             string
 	Label               []string
 	Logfile             string
@@ -87,6 +86,7 @@ type FromAndBudResults struct {
 	CPUSetCPUs   string
 	CPUSetMems   string
 	CPUShares    uint64
+	HttpProxy    bool
 	Isolation    string
 	Memory       string
 	MemorySwap   string
@@ -145,7 +145,6 @@ func GetBudFlags(flags *BudResults) pflag.FlagSet {
 	fs.StringSliceVarP(&flags.File, "file", "f", []string{}, "`pathname or URL` of a Dockerfile")
 	fs.StringVar(&flags.Format, "format", DefaultFormat(), "`format` of the built image's manifest and metadata. Use BUILDAH_FORMAT environment variable to override.")
 	fs.StringVar(&flags.Iidfile, "iidfile", "", "`file` to write the image ID to")
-	fs.BoolVar(&flags.HttpProxy, "http-proxy", true, "pass thru HTTP Proxy environment variables")
 	fs.StringArrayVar(&flags.Label, "label", []string{}, "Set metadata for an image (default [])")
 	fs.BoolVar(&flags.NoCache, "no-cache", false, "Do not use existing cached images for the container build. Build from the start with a new set of cached layers.")
 	fs.StringVar(&flags.Logfile, "logfile", "", "log to `file` instead of stdout/stderr")
@@ -178,6 +177,7 @@ func GetFromAndBudFlags(flags *FromAndBudResults, usernsResults *UserNSResults, 
 	fs.Uint64VarP(&flags.CPUShares, "cpu-shares", "c", 0, "CPU shares (relative weight)")
 	fs.StringVar(&flags.CPUSetCPUs, "cpuset-cpus", "", "CPUs in which to allow execution (0-3, 0,1)")
 	fs.StringVar(&flags.CPUSetMems, "cpuset-mems", "", "memory nodes (MEMs) in which to allow execution (0-3, 0,1). Only effective on NUMA systems.")
+	fs.BoolVar(&flags.HttpProxy, "http-proxy", true, "pass thru HTTP Proxy environment variables")
 	fs.StringVar(&flags.Isolation, "isolation", DefaultIsolation(), "`type` of process isolation to use. Use BUILDAH_ISOLATION environment variable to override.")
 	fs.StringVarP(&flags.Memory, "memory", "m", "", "memory limit (format: <number>[<unit>], where unit = b, k, m or g)")
 	fs.StringVar(&flags.MemorySwap, "memory-swap", "", "swap limit equal to memory plus swap: '-1' to enable unlimited swap")
