@@ -90,7 +90,7 @@ func CommonBuildOptions(c *cobra.Command) (*buildah.CommonBuildOptions, error) {
 		CPUSetCPUs:   c.Flag("cpuset-cpus").Value.String(),
 		CPUSetMems:   c.Flag("cpuset-mems").Value.String(),
 		CPUShares:    cpuShares,
-		HttpProxy:    c.Flag("http-proxy").Value.String() == "true",
+		//HttpProxy:    c.Flag("http-proxy").Value.String() == "true",
 		Memory:       memoryLimit,
 		MemorySwap:   memorySwap,
 		ShmSize:      c.Flag("shm-size").Value.String(),
