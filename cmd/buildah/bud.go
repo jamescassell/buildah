@@ -198,6 +198,7 @@ func budCmd(c *cobra.Command, inputArgs []string, iopts budResults) error {
 	if err != nil {
 		return err
 	}
+	commonOpts.HttpProxy = iopts.HttpProxy
 
 	if c.Flag("layers").Changed && c.Flag("no-cache").Changed {
 		return errors.Errorf("can only set one of 'layers' or 'no-cache'")
