@@ -932,9 +932,9 @@ func (b *Builder) configureUIDGID(g *generate.Generator, mountPoint string, opti
 	return nil
 }
 
-func (b *Builder) configureEnvironment(g *generate.Generator, options RunOptions, HttpProxy bool) {
+func (b *Builder) configureEnvironment(g *generate.Generator, options RunOptions) {
 	g.ClearProcessEnv()
-	if HttpProxy {
+	if options.HttpProxy {
 		for _, envSpec := range []string{
 				"http_proxy",
 				"HTTP_PROXY",
@@ -1047,7 +1047,7 @@ func (b *Builder) Run(command []string, options RunOptions) error {
 		return err
 	}
 
-	b.configureEnvironment(g, options, b.CommonBuildOpts.HttpProxy)
+	b.configureEnvironment(g, options)
 
 	if b.CommonBuildOpts == nil {
 		return errors.Errorf("Invalid format on container you must recreate the container")
